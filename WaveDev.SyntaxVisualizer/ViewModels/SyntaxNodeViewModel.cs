@@ -1,9 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+using System.Windows.Media;
 
 namespace WaveDev.SyntaxVisualizer.ViewModels
 {
@@ -21,7 +19,10 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
         {
             _wrappedSyntaxNode = node;
 
-            DisplayName = "[Node] " + Kind;
+            Color = Brushes.Blue;
+            DisplayName = Kind + " [" + _wrappedSyntaxNode.Span.Start + ".." + _wrappedSyntaxNode.Span.End + "]"
+                               + " [" + _wrappedSyntaxNode.FullSpan.Start + ".." + _wrappedSyntaxNode.FullSpan.End + "]"; ;
+
             Children = new List<ISyntaxViewModel>();
 
             WrapLeadingSyntaxTrivias();
@@ -52,6 +53,36 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
         {
             get;
             private set;
+        }
+
+        public Brush Color
+        {
+            get;
+            private set;
+        }
+
+        public ISyntaxViewModel SelectedSourceSyntax
+        {
+            get
+            {
+                return this;
+            }
+        }
+
+        public int SpanStart
+        {
+            get
+            {
+                return _wrappedSyntaxNode.Span.Start;
+            }
+        }
+
+        public int SpanEnd
+        {
+            get
+            {
+                return _wrappedSyntaxNode.Span.End;
+            }
         }
 
         #endregion

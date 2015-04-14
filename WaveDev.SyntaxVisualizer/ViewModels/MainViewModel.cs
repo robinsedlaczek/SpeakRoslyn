@@ -6,7 +6,7 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
     {
         #region Private Fields
 
-        private SyntaxTree _syntaxTree;
+        private SyntaxTree _sourceSyntaxTree;
 
         #endregion
 
@@ -14,27 +14,49 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
 
         public MainViewModel()
         {
+            SourceCode = 
+@"namespace MyNamespace.SubNamespace
+{
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            var index = 1;
+        }
+    }
+}";
+
             // TODO: [RS] Syntax analysis in ctor is not a good idea. Further, the analyze process should be async. 
             var analyzer = new SyntaxAnalyzer();
-            _syntaxTree = analyzer.Go();
+            _sourceSyntaxTree = analyzer.Go(SourceCode);
+
+            var node = _sourceSyntaxTree.GetRoot();
+            SourceSyntax = new SyntaxNodeViewModel(node);
         }
 
         #endregion
 
         #region Public Members
 
-        public ISyntaxViewModel Syntax
+        public string SourceCode
         {
-            get
-            {
-                var node = _syntaxTree.GetRoot();
-                var model = new SyntaxNodeViewModel(node);
+            get;
+            set;
+        }
 
-                return model;
-            }
+        public ISyntaxViewModel SourceSyntax
+        {
+            get;
+        }
+
+        public ISyntaxViewModel SelectedSourceSyntax
+        {
+            get;
+            set;
         }
 
         #endregion
+
 
     }
 }

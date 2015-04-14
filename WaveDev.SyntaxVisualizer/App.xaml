@@ -6,16 +6,5 @@
              StartupUri="./Views/MainWindow.xaml">
     <Application.Resources>
 
-        <HierarchicalDataTemplate x:Key="SyntaxTreeViewItemDataTemplate" ItemsSource="{Binding ChildNodes}" DataType="{x:Type models:SyntaxNodeViewModel}">
-            <StackPanel Orientation="Horizontal" Margin="4" Background="LightSeaGreen">
-                <!--<Image  Margin="2" Source="{Binding Path=ImageUrl}" ></Image>-->
-                <TextBlock Text="{Binding DisplayName}" Margin="2" >
-                </TextBlock>
-                <StackPanel.Effect>
-                    <DropShadowEffect BlurRadius="2" Color="LightGray" Opacity=".2" ></DropShadowEffect>
-                </StackPanel.Effect>
-            </StackPanel>
-        </HierarchicalDataTemplate>
-
     </Application.Resources>
 </Application>

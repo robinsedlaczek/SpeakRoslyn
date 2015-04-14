@@ -8,34 +8,16 @@ namespace WaveDev.SyntaxVisualizer
 {
     public class SyntaxAnalyzer
     {
-        #region Private Fields
-
-        private const string Code =
-            @"
-                namespace RoslynExperiment.SyntaxAnalyse
-                {
-                    public class Program
-                    {
-                        static void Main(string[] args)
-                        {
-                            var index = 1;
-                        }
-                    }
-                }
-            ";
-
-        #endregion
-
         #region Public Methods
 
-        public SyntaxTree Go()
+        public SyntaxTree Go(string sourceCode)
         {
             var parseOptions = CSharpParseOptions.Default;
             var path = string.Empty;
             var encoding = null as Encoding;
             var cancellationToken = default(CancellationToken);
 
-            var tree = CSharpSyntaxTree.ParseText(Code, parseOptions, path, encoding, cancellationToken);
+            var tree = CSharpSyntaxTree.ParseText(sourceCode, parseOptions, path, encoding, cancellationToken);
             var root = tree.GetRoot();
 
             VisitNode(root);

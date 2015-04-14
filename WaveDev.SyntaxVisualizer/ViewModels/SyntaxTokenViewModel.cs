@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using System.Windows.Media;
 
 namespace WaveDev.SyntaxVisualizer.ViewModels
 {
@@ -17,12 +18,20 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
         {
             _wrappedSyntaxToken = token;
 
-            DisplayName = "[Token] " + Kind;
+            Color = Brushes.Green;
+            DisplayName = Kind + " [" + _wrappedSyntaxToken.Span.Start + ".." + _wrappedSyntaxToken.Span.End + "]"
+                               + " [" + _wrappedSyntaxToken.FullSpan.Start + ".." + _wrappedSyntaxToken.FullSpan.End + "]";
         }
 
         #endregion
 
         #region Public Members
+
+        public Brush Color
+        {
+            get;
+            private set;
+        }
 
         public string Kind
         {
@@ -36,6 +45,30 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
         {
             get;
             private set;
+        }
+
+        public ISyntaxViewModel SelectedSourceSyntax
+        {
+            get
+            {
+                return this;
+            }
+        }
+
+        public int SpanStart
+        {
+            get
+            {
+                return _wrappedSyntaxToken.Span.Start;
+            }
+        }
+
+        public int SpanEnd
+        {
+            get
+            {
+                return _wrappedSyntaxToken.Span.End;
+            }
         }
 
         #endregion

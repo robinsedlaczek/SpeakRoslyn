@@ -6,22 +6,25 @@
         xmlns:local="clr-namespace:WaveDev.SyntaxVisualizer"
         xmlns:models="clr-namespace:WaveDev.SyntaxVisualizer.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="500" Width="800">
 
     <Window.DataContext>
         <models:MainViewModel />
     </Window.DataContext>
     
     <Grid>
-        <TreeView DataContext="{Binding Syntax}" ItemsSource="{Binding Children}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <TextBox x:Name="SourceCodeTextBox" Text="{Binding SourceCode}" Grid.Column="0" LostFocus="OnSourceCodeTextBoxLostFocus" TabIndex="1"/>
+
+        <TreeView DataContext="{Binding SourceSyntax, Mode=OneWay}" ItemsSource="{Binding Children}" Grid.Column="1" SelectedValuePath="SelectedSourceSyntax" SelectedItemChanged="OnTreeViewSelectedItemChanged" TabIndex="2">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Children}" >
-                    <StackPanel Orientation="Horizontal" Margin="4" >
-                        <TextBlock Text="{Binding DisplayName}" Margin="2" >
-                        </TextBlock>
-                        <StackPanel.Effect>
-                            <DropShadowEffect BlurRadius="2" Color="LightGray" Opacity=".2" ></DropShadowEffect>
-                        </StackPanel.Effect>
+                    <StackPanel Orientation="Horizontal" Margin="1" >
+                        <TextBlock Text="{Binding DisplayName}" Foreground="{Binding Color}" Margin="2" />
                     </StackPanel>
                 </HierarchicalDataTemplate>
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using System.Windows.Media;
 
 namespace WaveDev.SyntaxVisualizer.ViewModels
 {
@@ -17,12 +18,20 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
         {
             _wrappedSyntaxTrivia = trivia;
 
-            DisplayName = "[Trivia] " + Kind;
+            Color = Brushes.Red;
+            DisplayName = Kind + " [" + _wrappedSyntaxTrivia.Span.Start + ".." + _wrappedSyntaxTrivia.Span.End + "]"
+                               + " [" + _wrappedSyntaxTrivia.FullSpan.Start + ".." + _wrappedSyntaxTrivia.FullSpan.End + "]";
         }
 
         #endregion
 
         #region Public Members
+
+        public Brush Color
+        {
+            get;
+            private set;
+        }
 
         public string Kind
         {
@@ -36,6 +45,30 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
         {
             get;
             private set;
+        }
+
+        public ISyntaxViewModel SelectedSourceSyntax
+        {
+            get
+            {
+                return this;
+            }
+        }
+
+        public int SpanStart
+        {
+            get
+            {
+                return _wrappedSyntaxTrivia.Span.Start;
+            }
+        }
+
+        public int SpanEnd
+        {
+            get
+            {
+                return _wrappedSyntaxTrivia.Span.End;
+            }
         }
 
         #endregion
