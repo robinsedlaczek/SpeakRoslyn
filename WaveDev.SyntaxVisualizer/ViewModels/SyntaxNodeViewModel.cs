@@ -1,6 +1,9 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Roslyn.Utilities;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Media;
 
 namespace WaveDev.SyntaxVisualizer.ViewModels
@@ -17,18 +20,25 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
 
         public SyntaxNodeViewModel(SyntaxNode node)
         {
+            var compilationUnitSyntax = node as CompilationUnitSyntax;
+            var nsDeclSyntax = node as NamespaceDeclarationSyntax;
+            var clsDeclSyntax = node as ClassDeclarationSyntax;
+            var methDeclSyntax = node as MethodDeclarationSyntax;
+
+
             _wrappedSyntaxNode = node;
 
             Color = Brushes.Blue;
-            DisplayName = Kind + " [" + _wrappedSyntaxNode.Span.Start + ".." + _wrappedSyntaxNode.Span.End + "]"
-                               + " [" + _wrappedSyntaxNode.FullSpan.Start + ".." + _wrappedSyntaxNode.FullSpan.End + "]"; ;
+            DisplayName = Kind + " [" + _wrappedSyntaxNode.Span.Start + ".." + _wrappedSyntaxNode.Span.End + "]";
 
             Children = new List<ISyntaxViewModel>();
 
-            WrapLeadingSyntaxTrivias();
             WrapChildSyntaxNodes();
+            WrapLeadingSyntaxTrivias();
             WrapChildSyntaxTokens();
             WrapTrailingSyntaxTrivias();
+
+            Children = Children.OrderBy(syntax => syntax.SpanStart);
         }
 
         #endregion

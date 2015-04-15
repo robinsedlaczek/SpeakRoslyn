@@ -19,8 +19,7 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
             _wrappedSyntaxTrivia = trivia;
 
             Color = Brushes.Red;
-            DisplayName = Kind + " [" + _wrappedSyntaxTrivia.Span.Start + ".." + _wrappedSyntaxTrivia.Span.End + "]"
-                               + " [" + _wrappedSyntaxTrivia.FullSpan.Start + ".." + _wrappedSyntaxTrivia.FullSpan.End + "]";
+            DisplayName = Kind + " [" + _wrappedSyntaxTrivia.Span.Start + ".." + _wrappedSyntaxTrivia.Span.End + "]";
         }
 
         #endregion

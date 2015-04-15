@@ -19,8 +19,7 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
             _wrappedSyntaxToken = token;
 
             Color = Brushes.Green;
-            DisplayName = Kind + " [" + _wrappedSyntaxToken.Span.Start + ".." + _wrappedSyntaxToken.Span.End + "]"
-                               + " [" + _wrappedSyntaxToken.FullSpan.Start + ".." + _wrappedSyntaxToken.FullSpan.End + "]";
+            DisplayName = Kind + " [" + _wrappedSyntaxToken.Span.Start + ".." + _wrappedSyntaxToken.Span.End + "]";
         }
 
         #endregion
