@@ -1,5 +1,8 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Roslyn.Utilities;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Media;
 
 namespace WaveDev.SyntaxVisualizer.ViewModels
@@ -20,11 +23,23 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
 
             Color = Brushes.Red;
             DisplayName = Kind + " [" + _wrappedSyntaxTrivia.Span.Start + ".." + _wrappedSyntaxTrivia.Span.End + "]";
+
+            Children = new List<ISyntaxViewModel>();
+
+            WrapChildSyntaxNodes();
+
+            Children = Children.OrderBy(syntax => syntax.SpanStart);
         }
 
         #endregion
 
         #region Public Members
+
+        public IEnumerable<ISyntaxViewModel> Children
+        {
+            get;
+            private set;
+        }
 
         public Brush Color
         {
@@ -74,6 +89,15 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
 
         #region Private Methods
 
+        private void WrapChildSyntaxNodes()
+        {
+            var nodeToWrap = _wrappedSyntaxTrivia.GetStructure();
+
+            if (nodeToWrap == null)
+                return;
+
+            (Children as List<ISyntaxViewModel>).Add(new SyntaxNodeViewModel(nodeToWrap));
+        }
 
         #endregion
     }

@@ -12,7 +12,7 @@ namespace WaveDev.SyntaxVisualizer
 
         public SyntaxTree Go(string sourceCode)
         {
-            var parseOptions = CSharpParseOptions.Default;
+            var parseOptions = CSharpParseOptions.Default.WithPreprocessorSymbols("DEBUG");
             var path = string.Empty;
             var encoding = null as Encoding;
             var cancellationToken = default(CancellationToken);

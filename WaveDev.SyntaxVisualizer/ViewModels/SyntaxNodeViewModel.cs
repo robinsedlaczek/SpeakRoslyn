@@ -34,9 +34,7 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
             Children = new List<ISyntaxViewModel>();
 
             WrapChildSyntaxNodes();
-            WrapLeadingSyntaxTrivias();
             WrapChildSyntaxTokens();
-            WrapTrailingSyntaxTrivias();
 
             Children = Children.OrderBy(syntax => syntax.SpanStart);
         }
@@ -111,24 +109,10 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
         {
             var tokensToWrap = _wrappedSyntaxNode.ChildTokens();
 
+            var node = _wrappedSyntaxNode;
+
             foreach (var tokenToWrap in tokensToWrap)
                 (Children as List<ISyntaxViewModel>).Add(new SyntaxTokenViewModel(tokenToWrap));
-        }
-
-        private void WrapLeadingSyntaxTrivias()
-        {
-            var triviasToWrap = _wrappedSyntaxNode.GetLeadingTrivia();
-
-            foreach (var triviaToWrap in triviasToWrap)
-                (Children as List<ISyntaxViewModel>).Add(new SyntaxTriviaViewModel(triviaToWrap));
-        }
-
-        private void WrapTrailingSyntaxTrivias()
-        {
-            var triviasToWrap = _wrappedSyntaxNode.GetTrailingTrivia();
-
-            foreach (var triviaToWrap in triviasToWrap)
-                (Children as List<ISyntaxViewModel>).Add(new SyntaxTriviaViewModel(triviaToWrap));
         }
 
         #endregion

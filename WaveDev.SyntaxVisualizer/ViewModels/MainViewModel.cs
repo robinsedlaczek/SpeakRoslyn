@@ -14,16 +14,25 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
 
         public MainViewModel()
         {
-            SourceCode = 
-@"namespace MyNamespace.SubNamespace
+//            SourceCode =
+//@"namespace MyNamespace.SubNamespace
+//{
+//    public class Program
+//    {
+//        static void Main(string[] args)
+//        {
+//            var index = 1;
+
+//#if DEBUG
+//            index = 10;
+//#endif
+//        }
+//    }
+//}";
+
+            SourceCode =
+@"public void Do(string what)
 {
-    public class Program
-    {
-        static void Main(string[] args)
-        {
-            var index = 1;
-        }
-    }
 }";
 
             // TODO: [RS] Syntax analysis in ctor is not a good idea. Further, the analyze process should be async. 
