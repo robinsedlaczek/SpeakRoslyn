@@ -16,8 +16,6 @@ namespace WaveDev.SyntaxVisualizer.Views
             InitializeComponent();
 
             DataContext = MainViewModel.Instance;
-
-            SourceCodeTextEditor.Text = MainViewModel.Instance.SourceCode;
         }
 
         protected override void OnActivated(EventArgs e)
