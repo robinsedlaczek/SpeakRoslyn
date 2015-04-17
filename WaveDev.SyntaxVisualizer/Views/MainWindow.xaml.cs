@@ -15,8 +15,6 @@ namespace WaveDev.SyntaxVisualizer.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        private SyntaxTreeWindow _syntaxTreeWindow;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -31,20 +29,11 @@ namespace WaveDev.SyntaxVisualizer.Views
 
             SourceCodeTextBox.Document = document;
             SourceCodeTextBox.IsInactiveSelectionHighlightEnabled = true;
-
-            _syntaxTreeWindow = new SyntaxTreeWindow();
-            _syntaxTreeWindow.Show();
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-
-            if (_syntaxTreeWindow != null)
-            {
-                _syntaxTreeWindow.Close();
-                _syntaxTreeWindow = null;
-            }
 
             MainViewModel.Instance.PropertyChanged -= OnMainViewModelPropertyChanged;
         }
@@ -67,6 +56,10 @@ namespace WaveDev.SyntaxVisualizer.Views
                 //textRange = new TextRange(start, end);
                 //textRange.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Blue);
             }
+        }
+        private void OnTreeViewSelectedItemChanged<T>(object sender, RoutedPropertyChangedEventArgs<T> e)
+        {
+            var selectedSyntaxModel = (DataContext as MainViewModel).SelectedSourceSyntax = e.NewValue as ISyntaxViewModel;
         }
 
     }

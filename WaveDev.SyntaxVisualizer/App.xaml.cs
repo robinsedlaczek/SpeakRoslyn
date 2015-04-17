@@ -16,7 +16,6 @@ namespace WaveDev.SyntaxVisualizer
     {
         #region Private Fields
 
-        private SyntaxTreeWindow syntaxTreeWindow; 
 
         #endregion
 

@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WaveDev.SyntaxVisualizer"
         xmlns:models="clr-namespace:WaveDev.SyntaxVisualizer.ViewModels"
-        xmlns:editors="clr-namespace:Infragistics.Controls.Editors;assembly=InfragisticsWPF4.Controls.Editors.XamSyntaxEditor.v15.1"
         mc:Ignorable="d"
         Title="Code" Left="850" Top="200" Height="800" Width="1000"
         x:Class="WaveDev.SyntaxVisualizer.Views.MainWindow">
@@ -13,8 +12,23 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <RichTextBox x:Name="SourceCodeTextBox" />
+        <TreeView DataContext="{Binding SourceSyntax, Mode=OneWay}" ItemsSource="{Binding Children}" Grid.Column="0" SelectedValuePath="SelectedSourceSyntax" SelectedItemChanged="OnTreeViewSelectedItemChanged" TabIndex="2">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Children}" >
+                    <StackPanel Orientation="Horizontal" Margin="1" >
+                        <TextBlock Text="{Binding DisplayName}" Foreground="{Binding Color}" Margin="2" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+
+            </TreeView.ItemTemplate>
+        </TreeView>
+        
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+        
+        <RichTextBox x:Name="SourceCodeTextBox" FontSize="20" Grid.Column="2" />
     </Grid>
 </Window>
