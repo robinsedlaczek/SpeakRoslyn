@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
+using WaveDev.SyntaxVisualizer.Views;
 
 namespace WaveDev.SyntaxVisualizer
 {
@@ -13,6 +14,12 @@ namespace WaveDev.SyntaxVisualizer
     /// </summary>
     public partial class App : Application
     {
+        #region Private Fields
+
+        private SyntaxTreeWindow syntaxTreeWindow; 
+
+        #endregion
+
         protected override void OnActivated(EventArgs e)
         {
             base.OnActivated(e);
