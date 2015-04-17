@@ -1,5 +1,11 @@
-﻿using System;
+﻿using Infragistics.Documents;
+using Infragistics.Documents.Parsing;
+using System.ComponentModel;
+using System.IO;
+using System.Text;
 using System.Windows;
+using System.Windows.Documents;
+using System.Windows.Media;
 using WaveDev.SyntaxVisualizer.ViewModels;
 
 namespace WaveDev.SyntaxVisualizer.Views
@@ -16,19 +22,31 @@ namespace WaveDev.SyntaxVisualizer.Views
             InitializeComponent();
 
             DataContext = MainViewModel.Instance;
-        }
-
-        protected override void OnActivated(EventArgs e)
-        {
-            base.OnActivated(e);
-
             MainViewModel.Instance.PropertyChanged += OnMainViewModelPropertyChanged;
 
-            if (_syntaxTreeWindow == null)
+            var paragraph = new Paragraph();
+            var document = new FlowDocument(paragraph);
+
+            paragraph.Inlines.Add(new Run(MainViewModel.Instance.SourceCode));
+
+            SourceCodeTextBox.Document = document;
+            SourceCodeTextBox.IsInactiveSelectionHighlightEnabled = true;
+
+            _syntaxTreeWindow = new SyntaxTreeWindow();
+            _syntaxTreeWindow.Show();
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+
+            if (_syntaxTreeWindow != null)
             {
-                _syntaxTreeWindow = new SyntaxTreeWindow();
-                _syntaxTreeWindow.Show();
+                _syntaxTreeWindow.Close();
+                _syntaxTreeWindow = null;
             }
+
+            MainViewModel.Instance.PropertyChanged -= OnMainViewModelPropertyChanged;
         }
 
         private void OnMainViewModelPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -37,21 +55,19 @@ namespace WaveDev.SyntaxVisualizer.Views
             {
                 var syntax = (DataContext as MainViewModel).SelectedSourceSyntax;
 
-                SourceCodeTextBox.SelectionStart = syntax.SpanStart;
-                SourceCodeTextBox.SelectionLength = syntax.SpanEnd - syntax.SpanStart;
+                var start = SourceCodeTextBox.Document.ContentStart.GetPositionAtOffset(syntax.SpanStart + 2);
+                var end = SourceCodeTextBox.Document.ContentStart.GetPositionAtOffset(syntax.SpanEnd + 2);
+
+                SourceCodeTextBox.Selection.Select(start, end);
+                SourceCodeTextBox.SelectionBrush = Brushes.OrangeRed;
+
+                //var textRange = new TextRange(SourceCodeTextBox.Document.ContentStart, SourceCodeTextBox.Document.ContentEnd);
+                //textRange.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Black);
+
+                //textRange = new TextRange(start, end);
+                //textRange.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Blue);
             }
         }
 
-        private void OnSourceCodeTextBoxLostFocus(object sender, RoutedEventArgs e)
-        {
-            // [RS] When the TextBox loses focus the user can no longer see the selection.
-            //      This is a hack to make the TextBox think it did not lose focus.
-            e.Handled = true;
-        }
-
-        private void OnLostFocus(object sender, RoutedEventArgs e)
-        {
-            e.Handled = true;
-        }
     }
 }

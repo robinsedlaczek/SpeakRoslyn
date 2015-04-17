@@ -5,22 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WaveDev.SyntaxVisualizer"
         xmlns:models="clr-namespace:WaveDev.SyntaxVisualizer.ViewModels"
+        xmlns:editors="clr-namespace:Infragistics.Controls.Editors;assembly=InfragisticsWPF4.Controls.Editors.XamSyntaxEditor.v15.1"
         mc:Ignorable="d"
-        Title="Code" Left="850" Top="300" Height="800" Width="1000"
-        LostFocus="OnLostFocus"
-        x:Class="WaveDev.SyntaxVisualizer.Views.MainWindow"
->
-    
-    <!--   
-        xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit" 
-    -->
+        Title="Code" Left="850" Top="200" Height="800" Width="1000"
+        x:Class="WaveDev.SyntaxVisualizer.Views.MainWindow">
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <TextBox x:Name="SourceCodeTextBox" Text="{Binding SourceCode}" Grid.Column="0" LostFocus="OnSourceCodeTextBoxLostFocus" TabIndex="1" FontSize="20"/>
+        <RichTextBox x:Name="SourceCodeTextBox" />
     </Grid>
 </Window>
