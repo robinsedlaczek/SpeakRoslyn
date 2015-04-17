@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WaveDev.SyntaxVisualizer"
         xmlns:models="clr-namespace:WaveDev.SyntaxVisualizer.ViewModels"
         mc:Ignorable="d"
-        Title="Code" Left="850" Top="200" Height="800" Width="1000"
+        Title="Code" Left="515" Top="200" Height="800" Width="1000"
         x:Class="WaveDev.SyntaxVisualizer.Views.MainWindow">
 
     <Grid>
@@ -29,6 +29,6 @@
         
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
         
-        <RichTextBox x:Name="SourceCodeTextBox" FontSize="20" Grid.Column="2" />
+        <RichTextBox x:Name="SourceCodeTextBox" FontSize="16" Grid.Column="2" />
     </Grid>
 </Window>

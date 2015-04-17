@@ -1,5 +1,8 @@
 ﻿using Microsoft.CodeAnalysis;
+using System.Collections.Generic;
 using System.ComponentModel;
+using WaveDev.SyntaxVisualizer.Commands;
+using System;
 
 namespace WaveDev.SyntaxVisualizer.ViewModels
 {
@@ -17,22 +20,6 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
 
         private MainViewModel()
         {
-//            SourceCode =
-//@"namespace MyNamespace.SubNamespace
-//{
-//    public class Program
-//    {
-//        static void Main(string[] args)
-//        {
-//            var index = 1;
-
-//#if DEBUG
-//            index = 10;
-//#endif
-//        }
-//    }
-//}";
-
             SourceCode =
 @"public void Do(string what)
 {
@@ -52,6 +39,8 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
 
             var node = _sourceSyntaxTree.GetRoot();
             SourceSyntax = new SyntaxNodeViewModel(node);
+
+            InitSyntaxCommands();
         }
 
         #endregion
@@ -102,8 +91,41 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
             }
         }
 
+        public IEnumerable<ISyntaxCommand> SyntaxCommands
+        {
+            get;
+            private set;
+        }
+
         #endregion
 
+        #region Private Members
+
+        private void InitSyntaxCommands()
+        {
+            // TODO: [RS] Decouple with MEF!
+            var commands = new List<ISyntaxCommand>();
+
+            ISyntaxCommand command = new FindKeywordsSyntaxCommand();
+            command.Init(_sourceSyntaxTree);
+            commands.Add(command);
+
+            command = new FindNodesSyntaxCommand();
+            command.Init(_sourceSyntaxTree);
+            commands.Add(command);
+
+            command = new FindTokensSyntaxCommand();
+            command.Init(_sourceSyntaxTree);
+            commands.Add(command);
+
+            command = new FindTriviasSyntaxCommand();
+            command.Init(_sourceSyntaxTree);
+            commands.Add(command);
+
+            SyntaxCommands = commands;
+        }
+
+        #endregion
 
     }
 }

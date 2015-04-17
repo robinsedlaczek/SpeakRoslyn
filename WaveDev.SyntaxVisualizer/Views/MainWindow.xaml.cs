@@ -1,8 +1,4 @@
-﻿using Infragistics.Documents;
-using Infragistics.Documents.Parsing;
-using System.ComponentModel;
-using System.IO;
-using System.Text;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
@@ -15,6 +11,8 @@ namespace WaveDev.SyntaxVisualizer.Views
     /// </summary>
     public partial class MainWindow : Window
     {
+        private CommandWindow _commandWindow;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -29,6 +27,10 @@ namespace WaveDev.SyntaxVisualizer.Views
 
             SourceCodeTextBox.Document = document;
             SourceCodeTextBox.IsInactiveSelectionHighlightEnabled = true;
+
+            _commandWindow = new CommandWindow();
+            _commandWindow.DataContext = MainViewModel.Instance;
+            _commandWindow.Show();
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -36,6 +38,12 @@ namespace WaveDev.SyntaxVisualizer.Views
             base.OnClosing(e);
 
             MainViewModel.Instance.PropertyChanged -= OnMainViewModelPropertyChanged;
+
+            if (_commandWindow != null)
+            {
+                _commandWindow.Close();
+                _commandWindow = null;
+            }
         }
 
         private void OnMainViewModelPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
