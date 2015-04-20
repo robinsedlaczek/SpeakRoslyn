@@ -18,14 +18,24 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
 
         #region Construction
 
+        /// <summary>
+        /// This constructor is used to create a syntax node view model that represents the root node of the syntax tree.
+        /// </summary>
+        /// <param name="node"></param>
+        public SyntaxNodeViewModel(SyntaxNodeViewModel node)
+        {
+            var children = new List<ISyntaxViewModel>();
+            children.Add(node);
+
+            Children = children;
+        }
+
+        /// <summary>
+        /// This constructor is used to create syntax node view models for nodes, that are not the root node of a syntax tree.
+        /// </summary>
+        /// <param name="node"></param>
         public SyntaxNodeViewModel(SyntaxNode node)
         {
-            var compilationUnitSyntax = node as CompilationUnitSyntax;
-            var nsDeclSyntax = node as NamespaceDeclarationSyntax;
-            var clsDeclSyntax = node as ClassDeclarationSyntax;
-            var methDeclSyntax = node as MethodDeclarationSyntax;
-
-
             _wrappedSyntaxNode = node;
 
             Color = Brushes.Blue;

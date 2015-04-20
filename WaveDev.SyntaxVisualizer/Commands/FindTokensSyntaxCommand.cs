@@ -17,7 +17,7 @@ namespace WaveDev.SyntaxVisualizer.Commands
         {
             get
             {
-                return "Find Tokens";
+                return "Tokens";
             }
         }
 
