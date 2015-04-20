@@ -12,13 +12,23 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <ComboBox Grid.Row="0" ItemsSource="{Binding SyntaxCommands}" DisplayMemberPath="{Binding Name}" >
+        <ComboBox x:Name="CommandsComboBox" Grid.Row="0" ItemsSource="{Binding SyntaxCommands}" DisplayMemberPath="{Binding Name}" SelectionChanged="OnCommandsComboBoxSelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/WaveDev.SyntaxVisualizer;component/Resources/Syntax.png" />
+                        <TextBlock Text="{Binding Name}" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        
+
+        <ListView Grid.Row="1" x:Name="CommandResultListView" ItemsSource="{Binding SyntaxCommandResults}" SelectionChanged="OnCommandResultListViewSelectionChanged" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding DisplayName}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Window>

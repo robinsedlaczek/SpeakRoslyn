@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using WaveDev.SyntaxVisualizer.Commands;
+using WaveDev.SyntaxVisualizer.ViewModels;
 
 namespace WaveDev.SyntaxVisualizer.Views
 {
@@ -22,6 +13,23 @@ namespace WaveDev.SyntaxVisualizer.Views
         public CommandWindow()
         {
             InitializeComponent();
+
+            DataContext = MainViewModel.Instance;
+        }
+
+        private void OnCommandsComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var command = (ISyntaxCommand)CommandsComboBox.SelectedItem;
+            var result = command.Execute();
+
+            var viewModel = (MainViewModel)DataContext;
+            viewModel.SyntaxCommandResults = result;
+        }
+
+        private void OnCommandResultListViewSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var syntaxViewModel = CommandResultListView.SelectedItem as ISyntaxViewModel;
+            (DataContext as MainViewModel).SelectedSourceSyntax = syntaxViewModel;
         }
     }
 }

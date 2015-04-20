@@ -5,6 +5,6 @@
              xmlns:models="clr-namespace:WaveDev.SyntaxVisualizer.ViewModels"
              StartupUri="./Views/MainWindow.xaml">
     <Application.Resources>
-
+        <BitmapImage x:Key="SyntaxImageSource" UriSource="/WaveDev.SyntaxVisualizer;component/Resources/Syntax.png" />
     </Application.Resources>
 </Application>

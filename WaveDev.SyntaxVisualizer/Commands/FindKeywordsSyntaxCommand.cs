@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
-using System;
+using System.Collections.Generic;
+using WaveDev.SyntaxVisualizer.ViewModels;
 
 namespace WaveDev.SyntaxVisualizer.Commands
 {
@@ -20,9 +21,9 @@ namespace WaveDev.SyntaxVisualizer.Commands
             }
         }
 
-        public void Execute()
+        public IEnumerable<ISyntaxViewModel> Execute()
         {
-
+            return null;
 
         }
     }

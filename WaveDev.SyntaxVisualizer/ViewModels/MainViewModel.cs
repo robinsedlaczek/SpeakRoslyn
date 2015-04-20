@@ -13,6 +13,7 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
         private SyntaxTree _sourceSyntaxTree;
         private ISyntaxViewModel _selectedSourceSyntax;
         private static MainViewModel s_instance;
+        private IEnumerable<ISyntaxViewModel> _syntaxCommandResults;
 
         #endregion
 
@@ -95,6 +96,22 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
         {
             get;
             private set;
+        }
+
+        public IEnumerable<ISyntaxViewModel> SyntaxCommandResults
+        {
+            get
+            {
+                return _syntaxCommandResults;
+            }
+
+            set
+            {
+                _syntaxCommandResults = value;
+
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(SyntaxCommandResults)));
+            }
         }
 
         #endregion
