@@ -1,8 +1,10 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using WaveDev.SyntaxVisualizer.Commands;
-using System;
 
 namespace WaveDev.SyntaxVisualizer.ViewModels
 {
@@ -34,9 +36,19 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
         DontDo();
 }";
 
+            Debug.WriteLine("Load Syntax Tree...");
             // TODO: [RS] Syntax analysis in ctor is not a good idea. Further, the analyze process should be async. 
             var analyzer = new SyntaxAnalyzer();
             _sourceSyntaxTree = analyzer.Go(SourceCode);
+            Debug.WriteLine("Load Syntax Tree finished.");
+
+            long size = 0;
+            using (Stream s = new MemoryStream())
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(s, _sourceSyntaxTree);
+                size = s.Length;
+            }
 
             // [RS] Create syntax node view models recursively and then put the first syntax node view model into the root
             //      syntax node view model. This is because the view is bound to the SourceSyntax property and the tree items
