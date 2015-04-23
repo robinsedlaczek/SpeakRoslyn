@@ -1,9 +1,8 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using WaveDev.SyntaxVisualizer.Commands;
 
 namespace WaveDev.SyntaxVisualizer.ViewModels
@@ -36,19 +35,9 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
         DontDo();
 }";
 
-            Debug.WriteLine("Load Syntax Tree...");
             // TODO: [RS] Syntax analysis in ctor is not a good idea. Further, the analyze process should be async. 
             var analyzer = new SyntaxAnalyzer();
             _sourceSyntaxTree = analyzer.Go(SourceCode);
-            Debug.WriteLine("Load Syntax Tree finished.");
-
-            long size = 0;
-            using (Stream s = new MemoryStream())
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(s, _sourceSyntaxTree);
-                size = s.Length;
-            }
 
             // [RS] Create syntax node view models recursively and then put the first syntax node view model into the root
             //      syntax node view model. This is because the view is bound to the SourceSyntax property and the tree items
@@ -60,6 +49,17 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
             SourceSyntax = rootSyntaxNodeViewModel;
 
             InitSyntaxCommands();
+
+            var values = Enum.GetValues(typeof(SyntaxKind));
+            var foundValues = new List<object>();
+
+            foreach (var value in values)
+            {
+                if (value.ToString().Contains("Bitwise") && value.ToString().Contains("Expression"))
+                    foundValues.Add(value.ToString());
+            }
+
+            var a = 5;
         }
 
         #endregion

@@ -18,7 +18,7 @@ namespace WaveDev.SyntaxVisualizer
             var cancellationToken = default(CancellationToken);
 
             var tree = CSharpSyntaxTree.ParseText(sourceCode, parseOptions, path, encoding, cancellationToken);
-
+            
             return tree;
         }
 

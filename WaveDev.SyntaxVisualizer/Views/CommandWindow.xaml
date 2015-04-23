@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WaveDev.SyntaxVisualizer.Views"
         mc:Ignorable="d"
-        Title="Commands" Left="100" Top="200" Height="800" Width="400">
+        Title="Commands" Left="100" Top="100" Height="700" Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
