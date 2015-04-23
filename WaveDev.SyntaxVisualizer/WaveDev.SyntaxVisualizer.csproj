@@ -135,6 +135,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\UseSyntaxWalkerCommand.cs" />
     <Compile Include="Commands\FindTokensSyntaxCommand.cs" />
     <Compile Include="Commands\FindNodesSyntaxCommand.cs" />
     <Compile Include="Commands\FindTriviasSyntaxCommand.cs" />
