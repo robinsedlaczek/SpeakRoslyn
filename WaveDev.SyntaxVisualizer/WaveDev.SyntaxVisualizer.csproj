@@ -141,6 +141,9 @@
     <Compile Include="Commands\FindTriviasSyntaxCommand.cs" />
     <Compile Include="Commands\FindKeywordsSyntaxCommand.cs" />
     <Compile Include="Commands\ISyntaxCommand.cs" />
+    <Compile Include="Diagrams\CS\SyntaxKind.cs" />
+    <Compile Include="Diagrams\SyntaxKind.cs" />
+    <Compile Include="Diagrams\VB\SyntaxKind.cs" />
     <Compile Include="SyntaxAnalyzer.cs" />
     <Page Include="Views\CommandWindow.xaml">
       <SubType>Designer</SubType>
@@ -187,6 +190,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Diagrams\BinaryExpressionSyntax.cd" />
+    <None Include="Diagrams\MemberAccessExpressionSyntax.cd" />
     <None Include="Diagrams\SyntaxNode.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
