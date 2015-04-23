@@ -1,9 +1,11 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using WaveDev.SyntaxVisualizer.ViewModels;
 
 namespace WaveDev.SyntaxVisualizer.Commands
 {
+    [Export(typeof(ISyntaxCommand))]
     public class FindTriviasSyntaxCommand : ISyntaxCommand
     {
         private SyntaxTree _syntaxTree;

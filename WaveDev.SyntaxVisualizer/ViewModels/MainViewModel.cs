@@ -1,8 +1,10 @@
 ﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
+using System.Reflection;
 using WaveDev.SyntaxVisualizer.Commands;
 
 namespace WaveDev.SyntaxVisualizer.ViewModels
@@ -15,6 +17,7 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
         private ISyntaxViewModel _selectedSourceSyntax;
         private static MainViewModel s_instance;
         private IEnumerable<ISyntaxViewModel> _syntaxCommandResults;
+        private IEnumerable<ISyntaxCommand> _syntaxCommands;
 
         #endregion
 
@@ -48,18 +51,7 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
 
             SourceSyntax = rootSyntaxNodeViewModel;
 
-            InitSyntaxCommands();
-
-            var values = Enum.GetValues(typeof(SyntaxKind));
-            var foundValues = new List<object>();
-
-            foreach (var value in values)
-            {
-                if (value.ToString().Contains("Bitwise") && value.ToString().Contains("Expression"))
-                    foundValues.Add(value.ToString());
-            }
-
-            var a = 5;
+            ComposeApplicationParts();
         }
 
         #endregion
@@ -110,10 +102,21 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
             }
         }
 
+        [ImportMany(typeof(ISyntaxCommand))]
         public IEnumerable<ISyntaxCommand> SyntaxCommands
         {
-            get;
-            private set;
+            get
+            {
+                return _syntaxCommands;
+            }
+
+            private set
+            {
+                _syntaxCommands = value;
+
+                foreach (var command in _syntaxCommands)
+                    command.Init(_sourceSyntaxTree);
+            }
         }
 
         public IEnumerable<ISyntaxViewModel> SyntaxCommandResults
@@ -136,28 +139,19 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
 
         #region Private Members
 
-        private void InitSyntaxCommands()
+        private void ComposeApplicationParts()
         {
-            // TODO: [RS] Decouple with MEF!
-            var commands = new List<ISyntaxCommand>();
+            var catalog = new AssemblyCatalog(Assembly.GetExecutingAssembly());
+            var container = new CompositionContainer(catalog);
 
-            ISyntaxCommand command = new FindKeywordsSyntaxCommand();
-            command.Init(_sourceSyntaxTree);
-            commands.Add(command);
-
-            command = new FindNodesSyntaxCommand();
-            command.Init(_sourceSyntaxTree);
-            commands.Add(command);
-
-            command = new FindTokensSyntaxCommand();
-            command.Init(_sourceSyntaxTree);
-            commands.Add(command);
-
-            command = new FindTriviasSyntaxCommand();
-            command.Init(_sourceSyntaxTree);
-            commands.Add(command);
-
-            SyntaxCommands = commands;
+            try
+            {
+                container.ComposeParts(this);
+            }
+            catch (CompositionException compositionException)
+            {
+                Console.WriteLine(compositionException.ToString());
+            }
         }
 
         #endregion
