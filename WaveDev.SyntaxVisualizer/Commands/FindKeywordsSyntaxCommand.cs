@@ -1,6 +1,9 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using WaveDev.SyntaxVisualizer.ViewModels;
 
 namespace WaveDev.SyntaxVisualizer.Commands
@@ -25,8 +28,16 @@ namespace WaveDev.SyntaxVisualizer.Commands
 
         public IEnumerable<ISyntaxViewModel> Execute()
         {
-            return null;
+            var keywords = from token in _syntaxTree.GetRoot().DescendantTokens()
+                           where token.Kind().ToString().Contains("Keyword")
+                           select token;
 
+            var viewModels = new List<SyntaxTokenViewModel>();
+
+            foreach (var keywordToken in keywords)
+                viewModels.Add(new SyntaxTokenViewModel(keywordToken));
+
+            return viewModels;
         }
     }
 }
