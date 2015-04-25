@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
 using WaveDev.SyntaxVisualizer.ViewModels;
@@ -68,6 +69,9 @@ namespace WaveDev.SyntaxVisualizer.Views
 
         private void OnTreeViewSelectedItemChanged<T>(object sender, RoutedPropertyChangedEventArgs<T> e)
         {
+            // [RS] Use ListCollectionView for managing selected items etc. rather than doing it 
+            //      in the code behind!
+
             (DataContext as MainViewModel).SelectedSourceSyntax = e.NewValue as ISyntaxViewModel;
         }
 

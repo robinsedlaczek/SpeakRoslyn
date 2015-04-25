@@ -20,7 +20,7 @@ namespace WaveDev.SyntaxVisualizer.Views
         private void OnCommandsComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var viewModel = DataContext as MainViewModel;
-            var command = (ISyntaxCommand)CommandsComboBox.SelectedItem;
+            var command = (SyntaxCommand)CommandsComboBox.SelectedItem;
             var result = command.Execute();
 
             viewModel.SyntaxCommandResults = result;

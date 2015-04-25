@@ -5,34 +5,20 @@ using WaveDev.SyntaxVisualizer.ViewModels;
 
 namespace WaveDev.SyntaxVisualizer.Commands
 {
-    [Export(typeof(ISyntaxCommand))]
-    public class FindNodesSyntaxCommand : ISyntaxCommand
+    [Export(typeof(SyntaxCommand))]
+    public class FindNodesSyntaxCommand : SyntaxCommand
     {
-        private SyntaxTree _syntaxTree;
-
-        public void Init(SyntaxTree syntaxTree)
+        public FindNodesSyntaxCommand()
         {
-            _syntaxTree = syntaxTree;
+            Name = "Nodes";
         }
 
-        public string Name
+        public override IEnumerable<ISyntaxViewModel> Execute()
         {
-            get
-            {
-                return "Nodes";
-            }
-        }
-
-        public IEnumerable<ISyntaxViewModel> Execute()
-        {
-            var rootNode = _syntaxTree.GetRoot();
+            var rootNode = SyntaxTree.GetRoot();
             var nodes = rootNode.DescendantNodes();
-            var result = new List<ISyntaxViewModel>();
 
-            foreach (var node in nodes)
-                result.Add(new SyntaxNodeViewModel(node));
-
-            return result;
+            return WrapResult(nodes);
         }
     }
 }

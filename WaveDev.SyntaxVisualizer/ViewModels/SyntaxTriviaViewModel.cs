@@ -26,7 +26,7 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
 
             Children = new List<ISyntaxViewModel>();
 
-            WrapChildSyntaxNodes();
+            WrapStructuredTriviaSyntaxNodes();
 
             Children = Children.OrderBy(syntax => syntax.SpanStart);
         }
@@ -89,7 +89,7 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
 
         #region Private Methods
 
-        private void WrapChildSyntaxNodes()
+        private void WrapStructuredTriviaSyntaxNodes()
         {
             var nodeToWrap = _wrappedSyntaxTrivia.GetStructure();
 

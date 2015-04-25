@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +18,7 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
         private ISyntaxViewModel _selectedSourceSyntax;
         private static MainViewModel s_instance;
         private IEnumerable<ISyntaxViewModel> _syntaxCommandResults;
-        private IEnumerable<ISyntaxCommand> _syntaxCommands;
+        private IEnumerable<SyntaxCommand> _syntaxCommands;
 
         #endregion
 
@@ -26,7 +27,11 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
         private MainViewModel()
         {
             SourceCode =
-@"public void Do(string what)
+@"/// <summary>
+/// This method performs some magic.
+/// </summary>
+/// <param name=\""what\"">Something is needed to do magic things.</param>
+public void Do(string what)
 {
     var so = true;
 
@@ -36,10 +41,21 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
 
     if (so == what)
         DontDo();
-}";
+}
 
-            // TODO: [RS] Syntax analysis in ctor is not a good idea. Further, the analyze process should be async. 
-            var analyzer = new SyntaxAnalyzer();
+public int Foo()
+{
+
+}
+
+public string Bar()
+{
+
+}
+";
+
+        // TODO: [RS] Syntax analysis in ctor is not a good idea. Further, the analyze process should be async. 
+        var analyzer = new SyntaxAnalyzer();
             _sourceSyntaxTree = analyzer.Go(SourceCode);
 
             // [RS] Create syntax node view models recursively and then put the first syntax node view model into the root
@@ -52,6 +68,17 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
             SourceSyntax = rootSyntaxNodeViewModel;
 
             ComposeApplicationParts();
+
+
+            // TODO: [RS] Remove...
+            var values = new List<SyntaxKind>();
+            foreach (var value in Enum.GetValues(typeof(SyntaxKind)))
+            {
+                if (value.ToString().Contains("Documentation"))
+                    values.Add((SyntaxKind)value);
+            }
+
+            int a = 1;
         }
 
         #endregion
@@ -102,8 +129,8 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
             }
         }
 
-        [ImportMany(typeof(ISyntaxCommand))]
-        public IEnumerable<ISyntaxCommand> SyntaxCommands
+        [ImportMany(typeof(SyntaxCommand))]
+        public IEnumerable<SyntaxCommand> SyntaxCommands
         {
             get
             {

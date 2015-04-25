@@ -8,27 +8,17 @@ using WaveDev.SyntaxVisualizer.ViewModels;
 
 namespace WaveDev.SyntaxVisualizer.Commands
 {
-    [Export(typeof(ISyntaxCommand))]
-    public class FindKeywordsSyntaxCommand : ISyntaxCommand
+    [Export(typeof(SyntaxCommand))]
+    public class FindKeywordsSyntaxCommand : SyntaxCommand
     {
-        private SyntaxTree _syntaxTree;
-
-        public void Init(SyntaxTree syntaxTree)
+        public FindKeywordsSyntaxCommand()
         {
-            _syntaxTree = syntaxTree;
+            Name = "Keywords";
         }
 
-        public string Name
+        public override IEnumerable<ISyntaxViewModel> Execute()
         {
-            get
-            {
-                return "Keywords";
-            }
-        }
-
-        public IEnumerable<ISyntaxViewModel> Execute()
-        {
-            var keywords = from token in _syntaxTree.GetRoot().DescendantTokens()
+            var keywords = from token in SyntaxTree.GetRoot().DescendantTokens()
                            where token.Kind().ToString().Contains("Keyword")
                            select token;
 
