@@ -19,6 +19,7 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
         private static MainViewModel s_instance;
         private IEnumerable<ISyntaxViewModel> _syntaxCommandResults;
         private IEnumerable<SyntaxCommand> _syntaxCommands;
+        private string _sourceCode;
 
         #endregion
 
@@ -54,31 +55,7 @@ public string Bar()
 }
 ";
 
-        // TODO: [RS] Syntax analysis in ctor is not a good idea. Further, the analyze process should be async. 
-        var analyzer = new SyntaxAnalyzer();
-            _sourceSyntaxTree = analyzer.Go(SourceCode);
-
-            // [RS] Create syntax node view models recursively and then put the first syntax node view model into the root
-            //      syntax node view model. This is because the view is bound to the SourceSyntax property and the tree items
-            //      is are bound to the Children property of a syntax node view model. So we need to add the root element explicitely.
-            var node = _sourceSyntaxTree.GetRoot();
-            var syntaxNodeViewModel = new SyntaxNodeViewModel(node);
-            var rootSyntaxNodeViewModel = new SyntaxNodeViewModel(syntaxNodeViewModel);
-
-            SourceSyntax = rootSyntaxNodeViewModel;
-
             ComposeApplicationParts();
-
-
-            // TODO: [RS] Remove...
-            var values = new List<SyntaxKind>();
-            foreach (var value in Enum.GetValues(typeof(SyntaxKind)))
-            {
-                if (value.ToString().Contains("Documentation"))
-                    values.Add((SyntaxKind)value);
-            }
-
-            int a = 1;
         }
 
         #endregion
@@ -104,13 +81,33 @@ public string Bar()
 
         public string SourceCode
         {
-            get;
-            set;
+            get
+            {
+                return _sourceCode;
+            }
+
+            set
+            {
+                _sourceCode = value;
+
+                var analyzer = new SyntaxAnalyzer();
+                _sourceSyntaxTree = analyzer.Go(_sourceCode);
+
+                // [RS] Create syntax node view models recursively and then put the first syntax node view model into the root
+                //      syntax node view model. This is because the view is bound to the SourceSyntax property and the tree items
+                //      is are bound to the Children property of a syntax node view model. So we need to add the root element explicitely.
+                var node = _sourceSyntaxTree.GetRoot();
+                var syntaxNodeViewModel = new SyntaxNodeViewModel(node);
+                var rootSyntaxNodeViewModel = new SyntaxNodeViewModel(syntaxNodeViewModel);
+
+                SourceSyntax = rootSyntaxNodeViewModel;
+            }
         }
 
         public ISyntaxViewModel SourceSyntax
         {
             get;
+            private set;
         }
 
         public ISyntaxViewModel SelectedSourceSyntax

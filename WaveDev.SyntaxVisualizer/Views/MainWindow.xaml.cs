@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.Win32;
+using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -75,5 +77,24 @@ namespace WaveDev.SyntaxVisualizer.Views
             (DataContext as MainViewModel).SelectedSourceSyntax = e.NewValue as ISyntaxViewModel;
         }
 
+        private void OnOpenFileButtonClick(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFileDialog()
+            {
+                DefaultExt = ".cs",
+                Filter = "C# Code Files (.cs)|*.cs"
+            };
+
+            var result = dialog.ShowDialog();
+
+            if (result == true)
+            {
+                var filename = dialog.FileName;
+                var code = File.ReadAllText(filename);
+                var viewModel = DataContext as MainViewModel;
+
+                viewModel.SourceCode = code;
+            }
+        }
     }
 }

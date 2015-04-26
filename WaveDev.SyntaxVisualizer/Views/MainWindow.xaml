@@ -9,26 +9,35 @@
         Title="Code" Left="515" Top="100" Height="700" Width="1000"
         x:Class="WaveDev.SyntaxVisualizer.Views.MainWindow">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="5"/>
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+    <Grid Background="DarkGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-        <TreeView DataContext="{Binding SourceSyntax, Mode=OneWay}" ItemsSource="{Binding Children}" Grid.Column="0" SelectedValuePath="SelectedSourceSyntax" SelectedItemChanged="OnTreeViewSelectedItemChanged" TabIndex="2">
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Children}" >
-                    <StackPanel Orientation="Horizontal" Margin="1" >
-                        <TextBlock Text="{Binding DisplayName}" Foreground="{Binding Color}" Margin="2" />
-                    </StackPanel>
-                </HierarchicalDataTemplate>
+        <Button x:Name="OpenFileButton" Content="Open File..." Width="100" Height="30" Margin="10" Grid.Row="0" HorizontalAlignment="Left" Click="OnOpenFileButtonClick" />
+        
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
 
-            </TreeView.ItemTemplate>
-        </TreeView>
+            <TreeView DataContext="{Binding SourceSyntax, Mode=OneWay}" ItemsSource="{Binding Children}" Grid.Column="0" SelectedValuePath="SelectedSourceSyntax" SelectedItemChanged="OnTreeViewSelectedItemChanged" TabIndex="2">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Children}" >
+                        <StackPanel Orientation="Horizontal" Margin="1" >
+                            <TextBlock Text="{Binding DisplayName}" Foreground="{Binding Color}" Margin="2" />
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+
+                </TreeView.ItemTemplate>
+            </TreeView>
         
-        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
         
-        <RichTextBox x:Name="SourceCodeTextBox" FontSize="16" Grid.Column="2" />
+            <RichTextBox x:Name="SourceCodeTextBox" FontSize="16" Grid.Column="2" />
+        </Grid>
     </Grid>
 </Window>
