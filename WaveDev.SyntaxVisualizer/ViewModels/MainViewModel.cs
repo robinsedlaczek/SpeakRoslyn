@@ -20,6 +20,7 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
         private IEnumerable<ISyntaxViewModel> _syntaxCommandResults;
         private IEnumerable<SyntaxCommand> _syntaxCommands;
         private string _sourceCode;
+        private ISyntaxViewModel _sourceSyntax;
 
         #endregion
 
@@ -27,34 +28,6 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
 
         private MainViewModel()
         {
-            SourceCode =
-@"/// <summary>
-/// This method performs some magic.
-/// </summary>
-/// <param name=\""what\"">Something is needed to do magic things.</param>
-public void Do(string what)
-{
-    var so = true;
-
-#if DEBUG
-    so = false;
-#endif
-
-    if (so == what)
-        DontDo();
-}
-
-public int Foo()
-{
-
-}
-
-public string Bar()
-{
-
-}
-";
-
             ComposeApplicationParts();
         }
 
@@ -93,6 +66,9 @@ public string Bar()
                 var analyzer = new SyntaxAnalyzer();
                 _sourceSyntaxTree = analyzer.Go(_sourceCode);
 
+                foreach (var command in _syntaxCommands)
+                    command.Init(_sourceSyntaxTree);
+
                 // [RS] Create syntax node view models recursively and then put the first syntax node view model into the root
                 //      syntax node view model. This is because the view is bound to the SourceSyntax property and the tree items
                 //      is are bound to the Children property of a syntax node view model. So we need to add the root element explicitely.
@@ -100,14 +76,29 @@ public string Bar()
                 var syntaxNodeViewModel = new SyntaxNodeViewModel(node);
                 var rootSyntaxNodeViewModel = new SyntaxNodeViewModel(syntaxNodeViewModel);
 
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("SourceCode"));
+
+                SelectedSourceSyntax = null;
+                SyntaxCommandResults = new List<ISyntaxViewModel>();
                 SourceSyntax = rootSyntaxNodeViewModel;
             }
         }
 
         public ISyntaxViewModel SourceSyntax
         {
-            get;
-            private set;
+            get
+            {
+                return _sourceSyntax;
+            }
+
+            private set
+            {
+                _sourceSyntax = value;
+
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("SourceSyntax"));
+            }
         }
 
         public ISyntaxViewModel SelectedSourceSyntax
@@ -137,9 +128,6 @@ public string Bar()
             private set
             {
                 _syntaxCommands = value;
-
-                foreach (var command in _syntaxCommands)
-                    command.Init(_sourceSyntaxTree);
             }
         }
 
