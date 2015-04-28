@@ -23,14 +23,6 @@ namespace WaveDev.SyntaxVisualizer.Views
             DataContext = MainViewModel.Instance;
             MainViewModel.Instance.PropertyChanged += OnMainViewModelPropertyChanged;
 
-            var paragraph = new Paragraph();
-            var document = new FlowDocument(paragraph);
-
-            paragraph.Inlines.Add(new Run(MainViewModel.Instance.SourceCode));
-
-            SourceCodeTextBox.Document = document;
-            SourceCodeTextBox.IsInactiveSelectionHighlightEnabled = true;
-
             _commandWindow = new CommandWindow();
             _commandWindow.Show();
         }
@@ -66,6 +58,18 @@ namespace WaveDev.SyntaxVisualizer.Views
                     SourceCodeTextBox.Selection.Select(start, end);
                     SourceCodeTextBox.SelectionBrush = Brushes.OrangeRed;
                 }
+            }
+            else if (e.PropertyName == nameof(MainViewModel.SourceCode))
+            {
+                var paragraph = new Paragraph();
+                var document = new FlowDocument(paragraph);
+
+                paragraph.Inlines.Add(new Run(MainViewModel.Instance.SourceCode));
+
+                SourceCodeTextBox.Document = document;
+                SourceCodeTextBox.IsInactiveSelectionHighlightEnabled = true;
+
+                SourceCodeTextBox.SelectAll();
             }
         }
 
