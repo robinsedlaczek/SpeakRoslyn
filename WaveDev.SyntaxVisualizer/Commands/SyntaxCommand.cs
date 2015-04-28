@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using WaveDev.SyntaxVisualizer.ViewModels;
 
 namespace WaveDev.SyntaxVisualizer.Commands
@@ -11,10 +12,9 @@ namespace WaveDev.SyntaxVisualizer.Commands
             SyntaxTree = syntaxTree;
         }
 
-        public string Name
+        public abstract string Name
         {
             get;
-            protected set;
         }
 
         protected SyntaxTree SyntaxTree

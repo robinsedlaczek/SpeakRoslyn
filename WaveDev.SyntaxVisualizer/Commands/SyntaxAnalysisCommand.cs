@@ -1,27 +1,25 @@
-﻿using Microsoft.CodeAnalysis;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using WaveDev.SyntaxVisualizer.ViewModels;
 
 namespace WaveDev.SyntaxVisualizer.Commands
 {
     [Export(typeof(SyntaxCommand))]
-    public class FindTriviasSyntaxCommand : SyntaxCommand
+    public class SyntaxAnalysisCommand : SyntaxCommand
     {
         public override string Name
         {
             get
             {
-                return "Trivia";
+                return "Simple Syntax Analysis";
             }
         }
 
         public override IEnumerable<ISyntaxViewModel> Execute()
         {
-            var rootNode = SyntaxTree.GetRoot();
-            var trivias = rootNode.DescendantTrivia();
+            var result = SyntaxTree.GetRoot().DescendantNodes();
 
-            return WrapResult(trivias);
+            return WrapResult(result);
         }
     }
 }

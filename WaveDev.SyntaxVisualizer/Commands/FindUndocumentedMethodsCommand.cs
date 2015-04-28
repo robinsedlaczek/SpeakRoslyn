@@ -1,5 +1,4 @@
 ﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using WaveDev.SyntaxVisualizer.SyntaxWalker;
@@ -10,9 +9,12 @@ namespace WaveDev.SyntaxVisualizer.Commands
     [Export(typeof(SyntaxCommand))]
     public class FindUndocumentedMethodsCommand : SyntaxCommand
     {
-        public FindUndocumentedMethodsCommand()
+        public override string Name
         {
-            Name = "Find undocumented Methods";
+            get
+            {
+                return "Undocumented Methods";
+            }
         }
 
         public override IEnumerable<ISyntaxViewModel> Execute()
