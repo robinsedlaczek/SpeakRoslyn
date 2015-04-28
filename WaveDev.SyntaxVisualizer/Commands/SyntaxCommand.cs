@@ -57,6 +57,21 @@ namespace WaveDev.SyntaxVisualizer.Commands
             return result;
         }
 
+        protected ISyntaxViewModel WrapResult(SyntaxNode nodeToWrap)
+        {
+            return new SyntaxNodeViewModel(nodeToWrap);
+        }
+
+        protected ISyntaxViewModel WrapResult(SyntaxToken tokenToWrap)
+        {
+            return new SyntaxTokenViewModel(tokenToWrap);
+        }
+
+        protected ISyntaxViewModel WrapResult(SyntaxTrivia triviaToWrap)
+        {
+            return new SyntaxTriviaViewModel(triviaToWrap);
+        }
+
         #endregion
     }
 }
