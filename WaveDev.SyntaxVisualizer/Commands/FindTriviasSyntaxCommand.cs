@@ -8,9 +8,12 @@ namespace WaveDev.SyntaxVisualizer.Commands
     [Export(typeof(SyntaxCommand))]
     public class FindTriviasSyntaxCommand : SyntaxCommand
     {
-        public FindTriviasSyntaxCommand()
+        public override string Name
         {
-            Name = "Trivia";
+            get
+            {
+                return "Trivia";
+            }
         }
 
         public override IEnumerable<ISyntaxViewModel> Execute()

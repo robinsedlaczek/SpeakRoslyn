@@ -8,9 +8,12 @@ namespace WaveDev.SyntaxVisualizer.Commands
     [Export(typeof(SyntaxCommand))]
     public class FindNodesSyntaxCommand : SyntaxCommand
     {
-        public FindNodesSyntaxCommand()
+        public override string Name
         {
-            Name = "Nodes";
+            get
+            {
+                return "Nodes";
+            }
         }
 
         public override IEnumerable<ISyntaxViewModel> Execute()

@@ -20,10 +20,11 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>true</UseVSHostingProcess>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -140,6 +141,7 @@
     <Compile Include="Commands\FindNodesSyntaxCommand.cs" />
     <Compile Include="Commands\FindTriviasSyntaxCommand.cs" />
     <Compile Include="Commands\FindKeywordsSyntaxCommand.cs" />
+    <Compile Include="Commands\SyntaxAnalysisCommand.cs" />
     <Compile Include="Commands\SyntaxCommand.cs" />
     <Compile Include="Diagrams\CS\SyntaxKind.cs" />
     <Compile Include="Diagrams\SyntaxKind.cs" />
@@ -191,6 +193,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Diagrams\BinaryExpressionSyntax.cd" />
+    <None Include="Diagrams\Compilation.cd" />
     <None Include="Diagrams\MemberAccessExpressionSyntax.cd" />
     <None Include="Diagrams\SyntaxNode.cd" />
     <None Include="packages.config" />

@@ -24,7 +24,11 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
             _wrappedSyntaxToken = token;
 
             Color = Brushes.Green;
+
             DisplayName = Kind + " [" + _wrappedSyntaxToken.Span.Start + ".." + _wrappedSyntaxToken.Span.End + "]";
+
+            if (_wrappedSyntaxToken.IsMissing)
+                DisplayName += " - [IsMissing == true]";
 
             Children = new List<ISyntaxViewModel>();
 

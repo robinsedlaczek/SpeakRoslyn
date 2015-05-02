@@ -68,6 +68,8 @@ namespace WaveDev.SyntaxVisualizer.Views
 
                 SourceCodeTextBox.Document = document;
                 SourceCodeTextBox.IsInactiveSelectionHighlightEnabled = true;
+
+                SourceCodeTextBox.SelectAll();
             }
         }
 

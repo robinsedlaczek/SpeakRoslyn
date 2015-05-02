@@ -1,11 +1,11 @@
 ﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using WaveDev.SyntaxVisualizer.Commands;
 
 namespace WaveDev.SyntaxVisualizer.ViewModels
@@ -76,12 +76,11 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
                 var syntaxNodeViewModel = new SyntaxNodeViewModel(node);
                 var rootSyntaxNodeViewModel = new SyntaxNodeViewModel(syntaxNodeViewModel);
 
-                if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("SourceCode"));
-
                 SelectedSourceSyntax = null;
                 SyntaxCommandResults = new List<ISyntaxViewModel>();
                 SourceSyntax = rootSyntaxNodeViewModel;
+
+                NotifyPropertyChanged();
             }
         }
 
@@ -96,8 +95,7 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
             {
                 _sourceSyntax = value;
 
-                if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("SourceSyntax"));
+                NotifyPropertyChanged();
             }
         }
 
@@ -112,8 +110,7 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
             {
                 _selectedSourceSyntax = value;
 
-                if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(SelectedSourceSyntax)));
+                NotifyPropertyChanged();
             }
         }
 
@@ -128,6 +125,11 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
             private set
             {
                 _syntaxCommands = value;
+
+                foreach (var command in _syntaxCommands)
+                    command.Init(_sourceSyntaxTree);
+
+                NotifyPropertyChanged();
             }
         }
 
@@ -142,8 +144,7 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
             {
                 _syntaxCommandResults = value;
 
-                if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(SyntaxCommandResults)));
+                NotifyPropertyChanged();
             }
         }
 
@@ -164,6 +165,12 @@ namespace WaveDev.SyntaxVisualizer.ViewModels
             {
                 Console.WriteLine(compositionException.ToString());
             }
+        }
+
+        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion

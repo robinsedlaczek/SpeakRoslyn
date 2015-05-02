@@ -1,6 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -11,9 +10,12 @@ namespace WaveDev.SyntaxVisualizer.Commands
     [Export(typeof(SyntaxCommand))]
     public class FindKeywordsSyntaxCommand : SyntaxCommand
     {
-        public FindKeywordsSyntaxCommand()
+        public override string Name
         {
-            Name = "Keywords";
+            get
+            {
+                return "Keywords";
+            }
         }
 
         public override IEnumerable<ISyntaxViewModel> Execute()

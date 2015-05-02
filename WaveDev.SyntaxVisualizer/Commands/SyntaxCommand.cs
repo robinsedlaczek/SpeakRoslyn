@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using WaveDev.SyntaxVisualizer.ViewModels;
 
 namespace WaveDev.SyntaxVisualizer.Commands
@@ -11,10 +12,9 @@ namespace WaveDev.SyntaxVisualizer.Commands
             SyntaxTree = syntaxTree;
         }
 
-        public string Name
+        public abstract string Name
         {
             get;
-            protected set;
         }
 
         protected SyntaxTree SyntaxTree
@@ -55,6 +55,21 @@ namespace WaveDev.SyntaxVisualizer.Commands
                 result.Add(new SyntaxTriviaViewModel(trivia));
 
             return result;
+        }
+
+        protected ISyntaxViewModel WrapResult(SyntaxNode nodeToWrap)
+        {
+            return new SyntaxNodeViewModel(nodeToWrap);
+        }
+
+        protected ISyntaxViewModel WrapResult(SyntaxToken tokenToWrap)
+        {
+            return new SyntaxTokenViewModel(tokenToWrap);
+        }
+
+        protected ISyntaxViewModel WrapResult(SyntaxTrivia triviaToWrap)
+        {
+            return new SyntaxTriviaViewModel(triviaToWrap);
         }
 
         #endregion
