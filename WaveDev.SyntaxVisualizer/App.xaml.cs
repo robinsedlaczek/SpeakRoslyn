@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition.Hosting;
-using System.Windows;
+﻿using System.Windows;
 
 namespace WaveDev.SyntaxVisualizer
 {
