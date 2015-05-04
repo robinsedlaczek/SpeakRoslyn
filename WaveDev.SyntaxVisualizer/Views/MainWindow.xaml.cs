@@ -99,5 +99,6 @@ namespace WaveDev.SyntaxVisualizer.Views
                 viewModel.SourceCode = code;
             }
         }
+
     }
 }
