@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
 using WaveDev.SyntaxVisualizer.ViewModels;
@@ -100,5 +99,6 @@ namespace WaveDev.SyntaxVisualizer.Views
                 viewModel.SourceCode = code;
             }
         }
+
     }
 }

@@ -15,7 +15,8 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Button x:Name="OpenFileButton" Content="Open File..." Width="100" Height="30" Margin="10" Grid.Row="0" HorizontalAlignment="Left" Click="OnOpenFileButtonClick" />
+        <Button x:Name="OpenFileButton" Content="Open File..." Width="100" Height="30" Margin="10" Grid.Row="0" 
+                HorizontalAlignment="Left" Click="OnOpenFileButtonClick" />
         
         <Grid Grid.Row="1" >
             <Grid.ColumnDefinitions>
