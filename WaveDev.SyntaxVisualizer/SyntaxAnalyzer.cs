@@ -1,6 +1,5 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using System.Globalization;
 using System.Text;
 using System.Threading;
 
@@ -18,7 +17,7 @@ namespace WaveDev.SyntaxVisualizer
             var cancellationToken = default(CancellationToken);
 
             var tree = CSharpSyntaxTree.ParseText(sourceCode, parseOptions, path, encoding, cancellationToken);
-
+            
             return tree;
         }
 
