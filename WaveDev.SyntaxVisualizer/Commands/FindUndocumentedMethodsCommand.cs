@@ -19,10 +19,7 @@ namespace WaveDev.SyntaxVisualizer.Commands
 
         public override IEnumerable<ISyntaxViewModel> Execute()
         {
-            var walker = new MethodsWithoutDocCollector();
-            walker.Visit(SyntaxTree.GetRoot());
-
-            return WrapResult(walker.MethodsWithoutDoc);
+            return null;
         }
     }
 }
