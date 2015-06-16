@@ -1,8 +1,8 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using WaveDev.SyntaxVisualizer.SyntaxWalker;
 using WaveDev.SyntaxVisualizer.ViewModels;
+using WaveDev.SyntaxVisualizer.SyntaxWalker;
 
 namespace WaveDev.SyntaxVisualizer.Commands
 {
@@ -19,7 +19,10 @@ namespace WaveDev.SyntaxVisualizer.Commands
 
         public override IEnumerable<ISyntaxViewModel> Execute()
         {
-            return null;
+            var walker = new MethodsWithoutDocCollector();
+            walker.Visit(SyntaxTree.GetRoot());
+
+            return WrapResult(walker.MethodsWithoutDoc);
         }
     }
 }
