@@ -20,9 +20,6 @@ namespace WaveDev.SyntaxVisualizer.SyntaxWalker
 
         public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
         {
-            //var docTriviaList = node.GetLeadingTrivia()
-			//						  .Where(trivia => trivia.Kind() == SyntaxKind.SingleLineDocumentationCommentTrivia);
-
             var docSyntaxes = node.GetLeadingTrivia()
                                   .Where(trivia => trivia.GetStructure() != null)
                                   .Select(trivia => trivia.GetStructure())
