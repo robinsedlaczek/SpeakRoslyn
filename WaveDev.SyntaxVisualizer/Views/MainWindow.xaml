@@ -25,9 +25,14 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" Grid.Column="0">
-                <TextBlock Text="Syntax Tree" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextAlignment="Center" Foreground="White" Background="Gray" FontSize="26" FontFamily="Segoe UI Light" />
-                <TreeView DataContext="{Binding SourceSyntax, Mode=OneWay}" ItemsSource="{Binding Children}" SelectedValuePath="SelectedSourceSyntax" SelectedItemChanged="OnTreeViewSelectedItemChanged" TabIndex="2" VerticalAlignment="Stretch">
+            <Grid Grid.Column="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Grid.Row="0" Text="Syntax Tree" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextAlignment="Center" Foreground="White" Background="Gray" FontSize="26" FontFamily="Segoe UI Light" />
+                <TreeView Grid.Row="1" DataContext="{Binding SourceSyntax, Mode=OneWay}" ItemsSource="{Binding Children}" SelectedValuePath="SelectedSourceSyntax" SelectedItemChanged="OnTreeViewSelectedItemChanged" TabIndex="2" VerticalAlignment="Stretch">
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Children}" >
                             <StackPanel Orientation="Horizontal" Margin="1" >
@@ -37,14 +42,24 @@
 
                     </TreeView.ItemTemplate>
                 </TreeView>
-            </StackPanel>
+            </Grid>
 
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
 
-            <StackPanel Orientation="Vertical" Grid.Column="2">
+            <!--<StackPanel Orientation="Vertical" Grid.Column="2" >
                 <TextBlock Text="Code" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextAlignment="Center" Foreground="White" Background="Gray" FontSize="26" FontFamily="Segoe UI Light" />
-                <RichTextBox x:Name="SourceCodeTextBox" FontSize="16" />
-            </StackPanel>
+                --><!--<ScrollViewer VerticalContentAlignment="Stretch">--><!--
+                    <RichTextBox x:Name="SourceCodeTextBox" FontSize="16" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                --><!--</ScrollViewer>--><!--
+            </StackPanel>-->
+            <Grid Grid.Column="2" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="Code" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextAlignment="Center" Foreground="White" Background="Gray" FontSize="26" FontFamily="Segoe UI Light" />
+                <RichTextBox Grid.Row="1" x:Name="SourceCodeTextBox" FontSize="16" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+            </Grid>
         </Grid>
     </Grid>
 </Window>
