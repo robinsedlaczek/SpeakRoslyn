@@ -151,7 +151,6 @@
     <Compile Include="Commands\FindNodesSyntaxCommand.cs" />
     <Compile Include="Commands\FindTokensSyntaxCommand.cs" />
     <Compile Include="Commands\FindTriviasSyntaxCommand.cs" />
-    <Compile Include="Commands\SimpleAnalysisCommand.cs" />
     <Compile Include="Commands\SyntaxCommand.cs" />
     <Compile Include="Diagrams\CS\SyntaxKind.cs" />
     <Compile Include="Diagrams\SyntaxKind.cs" />
