@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using WaveDev.SyntaxVisualizer.ViewModels;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace WaveDev.SyntaxVisualizer.Commands
 {

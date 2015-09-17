@@ -4,6 +4,9 @@ using WaveDev.SyntaxVisualizer.ViewModels;
 
 namespace WaveDev.SyntaxVisualizer.Commands
 {
+    /// <summary>
+    /// Test
+    /// </summary>
     public abstract class SyntaxCommand
     {
         public void Init(SyntaxTree syntaxTree)

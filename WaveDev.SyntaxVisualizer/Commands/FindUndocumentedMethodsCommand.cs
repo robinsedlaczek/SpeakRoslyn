@@ -1,8 +1,11 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using WaveDev.SyntaxVisualizer.ViewModels;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using WaveDev.SyntaxVisualizer.SyntaxWalker;
+using WaveDev.SyntaxVisualizer.ViewModels;
 
 namespace WaveDev.SyntaxVisualizer.Commands
 {
@@ -13,13 +16,13 @@ namespace WaveDev.SyntaxVisualizer.Commands
         {
             get
             {
-                return "Undocumented Methods";
+                return "Find undocumented methods";
             }
         }
 
         public override IEnumerable<ISyntaxViewModel> Execute()
         {
-            var walker = new MethodsWithoutDocCollector();
+            var walker = new FindUndocumentedMethodsSyntaxWalker();
             walker.Visit(SyntaxTree.GetRoot());
 
             return WrapResult(walker.MethodsWithoutDoc);

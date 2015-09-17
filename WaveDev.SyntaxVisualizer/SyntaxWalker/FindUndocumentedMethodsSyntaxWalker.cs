@@ -1,13 +1,16 @@
-using Microsoft.CodeAnalysis.CSharp;
+﻿using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace WaveDev.SyntaxVisualizer.SyntaxWalker
 {
-    internal class MethodsWithoutDocCollector : CSharpSyntaxWalker
+    public class FindUndocumentedMethodsSyntaxWalker : CSharpSyntaxWalker
     {
-        public MethodsWithoutDocCollector()
+        public FindUndocumentedMethodsSyntaxWalker()
         {
             MethodsWithoutDoc = new List<MethodDeclarationSyntax>();
         }
@@ -28,6 +31,5 @@ namespace WaveDev.SyntaxVisualizer.SyntaxWalker
             if (docSyntaxes.FirstOrDefault() == null)
                 MethodsWithoutDoc.Add(node);
         }
-
     }
 }
