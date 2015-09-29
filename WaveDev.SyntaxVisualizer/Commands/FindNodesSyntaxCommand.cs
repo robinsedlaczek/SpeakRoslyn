@@ -1,9 +1,9 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using WaveDev.SyntaxVisualizer.ViewModels;
+using WaveDev.SpeakRoslyn.ViewModels;
 
-namespace WaveDev.SyntaxVisualizer.Commands
+namespace WaveDev.SpeakRoslyn.Commands
 {
     [Export(typeof(SyntaxCommand))]
     public class FindNodesSyntaxCommand : SyntaxCommand

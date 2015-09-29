@@ -1,4 +1,4 @@
-﻿namespace WaveDev.SyntaxVisualizer.Diagrams.VB
+﻿namespace WaveDev.SpeakRoslyn.Diagrams.VB
 {
 
     enum SyntaxKind

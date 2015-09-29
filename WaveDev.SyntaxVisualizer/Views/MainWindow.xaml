@@ -3,11 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WaveDev.SyntaxVisualizer"
-        xmlns:models="clr-namespace:WaveDev.SyntaxVisualizer.ViewModels"
+        xmlns:local="clr-namespace:WaveDev.SpeakRoslyn"
+        xmlns:models="clr-namespace:WaveDev.SpeakRoslyn.ViewModels"
         mc:Ignorable="d"
         Title="Code" Left="515" Top="100" Height="700" Width="1000"
-        x:Class="WaveDev.SyntaxVisualizer.Views.MainWindow">
+        x:Class="WaveDev.SpeakRoslyn.Views.MainWindow">
 
     <Grid Background="DarkGray">
         <Grid.RowDefinitions>

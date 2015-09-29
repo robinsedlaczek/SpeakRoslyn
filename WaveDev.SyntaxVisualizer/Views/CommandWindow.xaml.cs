@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using WaveDev.SyntaxVisualizer.Commands;
-using WaveDev.SyntaxVisualizer.ViewModels;
+using WaveDev.SpeakRoslyn.Commands;
+using WaveDev.SpeakRoslyn.ViewModels;
 
-namespace WaveDev.SyntaxVisualizer.Views
+namespace WaveDev.SpeakRoslyn.Views
 {
     /// <summary>
     /// Interaction logic for CommandWindow.xaml

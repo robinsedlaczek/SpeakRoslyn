@@ -9,8 +9,8 @@
     <ProjectGuid>{1E8C3923-6EC7-4CA9-8B8E-D9FC7B048B46}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WaveDev.SyntaxVisualizer</RootNamespace>
-    <AssemblyName>WaveDev.SyntaxVisualizer</AssemblyName>
+    <RootNamespace>WaveDev.SpeakRoslyn</RootNamespace>
+    <AssemblyName>WaveDev.SpeakRoslyn</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

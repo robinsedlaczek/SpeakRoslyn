@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace WaveDev.SyntaxVisualizer
+namespace WaveDev.SpeakRoslyn
 {
     /// <summary>
     /// Interaction logic for App.xaml

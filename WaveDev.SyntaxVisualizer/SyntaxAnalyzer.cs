@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using System.Text;
 using System.Threading;
 
-namespace WaveDev.SyntaxVisualizer
+namespace WaveDev.SpeakRoslyn
 {
     public class SyntaxAnalyzer
     {

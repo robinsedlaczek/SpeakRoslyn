@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace WaveDev.SyntaxVisualizer.ViewModels
+namespace WaveDev.SpeakRoslyn.ViewModels
 {
     public interface ISyntaxViewModel
     {

@@ -6,9 +6,9 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using WaveDev.SyntaxVisualizer.Commands;
+using WaveDev.SpeakRoslyn.Commands;
 
-namespace WaveDev.SyntaxVisualizer.ViewModels
+namespace WaveDev.SpeakRoslyn.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {

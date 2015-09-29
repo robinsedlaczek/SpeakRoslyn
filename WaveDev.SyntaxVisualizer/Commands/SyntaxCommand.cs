@@ -1,8 +1,8 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
-using WaveDev.SyntaxVisualizer.ViewModels;
+using WaveDev.SpeakRoslyn.ViewModels;
 
-namespace WaveDev.SyntaxVisualizer.Commands
+namespace WaveDev.SpeakRoslyn.Commands
 {
     /// <summary>
     /// Test

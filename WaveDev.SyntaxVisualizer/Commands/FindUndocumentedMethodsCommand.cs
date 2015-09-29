@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WaveDev.SyntaxVisualizer.SyntaxWalker;
-using WaveDev.SyntaxVisualizer.ViewModels;
+using WaveDev.SpeakRoslyn.SyntaxWalker;
+using WaveDev.SpeakRoslyn.ViewModels;
 
-namespace WaveDev.SyntaxVisualizer.Commands
+namespace WaveDev.SpeakRoslyn.Commands
 {
     [Export(typeof(SyntaxCommand))]
     public class FindUndocumentedMethodsCommand : SyntaxCommand

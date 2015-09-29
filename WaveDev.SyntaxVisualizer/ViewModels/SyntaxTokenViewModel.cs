@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Media;
 
-namespace WaveDev.SyntaxVisualizer.ViewModels
+namespace WaveDev.SpeakRoslyn.ViewModels
 {
     public class SyntaxTokenViewModel : ISyntaxViewModel
     {

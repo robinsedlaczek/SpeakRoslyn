@@ -4,9 +4,9 @@ using System.IO;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
-using WaveDev.SyntaxVisualizer.ViewModels;
+using WaveDev.SpeakRoslyn.ViewModels;
 
-namespace WaveDev.SyntaxVisualizer.Views
+namespace WaveDev.SpeakRoslyn.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
