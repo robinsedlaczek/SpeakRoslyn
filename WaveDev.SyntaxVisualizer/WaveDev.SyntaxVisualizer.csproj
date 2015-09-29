@@ -145,6 +145,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\CreateAdhocWorkspaceCommand.cs" />
     <Compile Include="Commands\FindUndocumentedMethodsCommand.cs" />
     <Compile Include="Commands\FindXmlLiteralTokenSyntaxCommand.cs" />
     <Compile Include="Commands\FindKeywordsSyntaxCommand.cs" />
