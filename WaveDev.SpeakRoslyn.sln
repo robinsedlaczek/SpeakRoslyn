@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveDev.SpeakRoslyn", "WaveDev.SyntaxVisualizer\WaveDev.SpeakRoslyn.csproj", "{1E8C3923-6EC7-4CA9-8B8E-D9FC7B048B46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveDev.SpeakRoslyn", "WaveDev.SpeakRoslyn\WaveDev.SpeakRoslyn.csproj", "{1E8C3923-6EC7-4CA9-8B8E-D9FC7B048B46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
