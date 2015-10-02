@@ -1,7 +1,11 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Host.Mef;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
+using System.Composition.Hosting;
 using System.Linq;
+using System.Reflection;
 using WaveDev.SpeakRoslyn.ViewModels;
 
 namespace WaveDev.SpeakRoslyn.Commands
@@ -22,25 +26,27 @@ namespace WaveDev.SpeakRoslyn.Commands
             var sourceText = SyntaxTree.GetTextAsync().Result;
 
             var projectFilePath = null as string;
-            
-            // [Feedback] Why using a string as language parameter and not the LanguageNames enum?
             var projectInfo = ProjectInfo.Create(ProjectId.CreateNewId(), VersionStamp.Default, "WaveDev.Project.A", "WaveDev.Project", LanguageNames.CSharp, projectFilePath);
 
-            // [Feedback] DocumentId is created relative to ProjectId. 
-            //            Why is the DocumentInfo not assigned to the ProjectInfo? 
-            //            What are the differences between xId and xInfo types?
-            //            What does the relation between DocumentId and ProjectId mean? => There is no such relation between ProjectId and SolutionId.
             var documentInfo = DocumentInfo.Create(DocumentId.CreateNewId(projectInfo.Id), "CodeFile_A.cs");
             documentInfo.WithTextLoader(TextLoader.From(TextAndVersion.Create(sourceText, VersionStamp.Default)));
-            //            I have to add the documents to the project manually.
+
             projectInfo = projectInfo.WithDocuments(new List<DocumentInfo> { documentInfo });
 
             var solutionFilePath = null as string;
             var solutionInfo = SolutionInfo.Create(SolutionId.CreateNewId(), VersionStamp.Default, solutionFilePath, new List<ProjectInfo> { projectInfo });
 
-            // var host = new MyHostServices()
-            var workspace = new AdhocWorkspace();
+
+            // [RS] Important to use the default assemblies (Microsoft.CodeAnalysis.Workspaces...), too. When creating the workspace, 
+            //      it tries to get a IWorkspaceTaskSchedulerFactory service. There is an implementation in the default assemblies, so
+            //      we do not need to implement one here.
+            var assemblies = MefHostServices.DefaultAssemblies
+                .Add(Assembly.GetExecutingAssembly());
+
+            var host = MefHostServices.Create(assemblies);
+            var workspace = new AdhocWorkspace(host);
             workspace.AddSolution(solutionInfo);
+
 
 
             workspace.OpenDocument(documentInfo.Id);
@@ -49,5 +55,6 @@ namespace WaveDev.SpeakRoslyn.Commands
 
             return new List<SyntaxTokenViewModel>();
         }
+
     }
 }

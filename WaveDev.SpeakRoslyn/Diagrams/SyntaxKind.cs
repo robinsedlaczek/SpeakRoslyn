@@ -2,6 +2,7 @@
 {
     enum SyntaxKind
     {
+        None,
         EqualsExpression = 1,
         LogicalAndExpression,
         LogicalOrExpression,
