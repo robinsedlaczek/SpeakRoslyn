@@ -3,8 +3,6 @@ using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.MSBuild;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
-using System.Composition.Hosting;
 using System.Linq;
 using System.Reflection;
 using WaveDev.SpeakRoslyn.ViewModels;
@@ -29,13 +27,9 @@ namespace WaveDev.SpeakRoslyn.Commands
             var projectFilePath = null as string;
             var projectInfo = ProjectInfo.Create(ProjectId.CreateNewId(), VersionStamp.Default, "WaveDev.Project.A", "WaveDev.Project", LanguageNames.CSharp, projectFilePath);
 
-            var documentInfo = DocumentInfo.Create(DocumentId.CreateNewId(projectInfo.Id), "CodeFile_A.cs");
-            documentInfo.WithTextLoader(TextLoader.From(TextAndVersion.Create(sourceText, VersionStamp.Default)));
-
-            projectInfo = projectInfo.WithDocuments(new List<DocumentInfo> { documentInfo });
-
-            var solutionFilePath = null as string;
-            var solutionInfo = SolutionInfo.Create(SolutionId.CreateNewId(), VersionStamp.Default, solutionFilePath, new List<ProjectInfo> { projectInfo });
+            DocumentInfo documentInfo;
+            SolutionInfo solutionInfo;
+            projectInfo = MyMethod(sourceText, projectInfo, out documentInfo, out solutionInfo);
 
 
             // [RS] Important to use the default assemblies (Microsoft.CodeAnalysis.Workspaces...), too. When creating the workspace, 
@@ -66,5 +60,16 @@ namespace WaveDev.SpeakRoslyn.Commands
             return new List<SyntaxTokenViewModel>();
         }
 
+        private static ProjectInfo MyMethod(Microsoft.CodeAnalysis.Text.SourceText sourceText, ProjectInfo projectInfo, out DocumentInfo documentInfo, out SolutionInfo solutionInfo)
+        {
+            documentInfo = DocumentInfo.Create(DocumentId.CreateNewId(projectInfo.Id), "CodeFile_A.cs");
+            documentInfo.WithTextLoader(TextLoader.From(TextAndVersion.Create(sourceText, VersionStamp.Default)));
+
+            projectInfo = projectInfo.WithDocuments(new List<DocumentInfo> { documentInfo });
+
+            var solutionFilePath = null as string;
+            solutionInfo = SolutionInfo.Create(SolutionId.CreateNewId(), VersionStamp.Default, solutionFilePath, new List<ProjectInfo> { projectInfo });
+            return projectInfo;
+        }
     }
 }
