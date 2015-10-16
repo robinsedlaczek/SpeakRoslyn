@@ -1,0 +1,60 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WaveDev.SpeakRoslyn"
+        xmlns:models="clr-namespace:WaveDev.SpeakRoslyn.ViewModels"
+        mc:Ignorable="d"
+        Title="Code" Left="515" Top="100" Height="700" Width="1000"
+        x:Class="WaveDev.SpeakRoslyn.Views.MainWindow">
+
+    <Grid Background="DarkGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="OpenFileButton" Content="Open File..." Width="100" Height="30" Margin="10" Grid.Row="0" 
+                HorizontalAlignment="Left" Click="OnOpenFileButtonClick" />  
+        
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="Code" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextAlignment="Center" Foreground="White" Background="Gray" FontSize="26" FontFamily="Segoe UI Light" />
+                <RichTextBox Grid.Row="1" x:Name="SourceCodeTextBox" FontSize="16" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+            </Grid>
+
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+
+            <Grid Grid.Column="2" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Grid.Row="0" Text="Syntax Tree" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextAlignment="Center" Foreground="White" Background="Gray" FontSize="26" FontFamily="Segoe UI Light" />
+                <TreeView Grid.Row="1" DataContext="{Binding SourceSyntax, Mode=OneWay}" ItemsSource="{Binding Children}" SelectedValuePath="SelectedSourceSyntax" SelectedItemChanged="OnTreeViewSelectedItemChanged" TabIndex="2" VerticalAlignment="Stretch">
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Children}" >
+                            <StackPanel Orientation="Horizontal" Margin="1" >
+                                <TextBlock Text="{Binding DisplayName}" Foreground="{Binding Color}" Margin="2" />
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,10 @@
+﻿<Application x:Class="WaveDev.SpeakRoslyn.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WaveDev.SpeakRoslyn"
+             xmlns:models="clr-namespace:WaveDev.SpeakRoslyn.ViewModels"
+             StartupUri="./Views/MainWindow.xaml">
+    <Application.Resources>
+        <BitmapImage x:Key="SyntaxImageSource" UriSource="/WaveDev.SyntaxVisualizer;component/Resources/Syntax.png" />
+    </Application.Resources>
+</Application>
