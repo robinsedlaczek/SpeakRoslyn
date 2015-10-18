@@ -8,8 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WaveDev.SpeakRoslyn.Properties {
+namespace WaveDev.SpeakRoslyn.DosAnalyzers {
     using System;
+    using System.Reflection;
     
     
     /// <summary>
@@ -39,7 +40,7 @@ namespace WaveDev.SpeakRoslyn.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WaveDev.SpeakRoslyn.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WaveDev.SpeakRoslyn.DosAnalyzers.Resources", typeof(Resources).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +58,33 @@ namespace WaveDev.SpeakRoslyn.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing code documentation..
+        /// </summary>
+        internal static string AnalyzerDescription {
+            get {
+                return ResourceManager.GetString("AnalyzerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Method leaks xml code documentation..
+        /// </summary>
+        internal static string AnalyzerMessageFormat {
+            get {
+                return ResourceManager.GetString("AnalyzerMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing code documentation.
+        /// </summary>
+        internal static string AnalyzerTitle {
+            get {
+                return ResourceManager.GetString("AnalyzerTitle", resourceCulture);
             }
         }
     }
