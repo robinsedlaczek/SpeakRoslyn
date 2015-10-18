@@ -10,6 +10,8 @@ namespace WaveDev.SpeakRoslyn.SyntaxWalker
         public FindUndocumentedMethodsSyntaxWalker()
         {
             MethodsWithoutDoc = new List<MethodDeclarationSyntax>();
+
+            
         }
 
         public IList<MethodDeclarationSyntax> MethodsWithoutDoc
