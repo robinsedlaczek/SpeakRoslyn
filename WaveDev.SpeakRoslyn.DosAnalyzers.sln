@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveDev.SpeakRoslyn.DosAnalyzers", "WaveDev.SpeakRoslyn.DosAnalyzers\WaveDev.SpeakRoslyn.DosAnalyzers\WaveDev.SpeakRoslyn.DosAnalyzers\WaveDev.SpeakRoslyn.DosAnalyzers.csproj", "{3F5A9C3F-1961-4AAF-A935-F0074741CE7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveDev.SpeakRoslyn.DosAnalyzers.Test", "WaveDev.SpeakRoslyn.DosAnalyzers\WaveDev.SpeakRoslyn.DosAnalyzers\WaveDev.SpeakRoslyn.DosAnalyzers.Test\WaveDev.SpeakRoslyn.DosAnalyzers.Test.csproj", "{DD5275E7-5C20-4169-BC9A-C0B25F968592}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveDev.SpeakRoslyn.DosAnalyzers.Vsix", "WaveDev.SpeakRoslyn.DosAnalyzers\WaveDev.SpeakRoslyn.DosAnalyzers\WaveDev.SpeakRoslyn.DosAnalyzers.Vsix\WaveDev.SpeakRoslyn.DosAnalyzers.Vsix.csproj", "{B3930F24-817B-4150-8FA9-9A7093057CC6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F5A9C3F-1961-4AAF-A935-F0074741CE7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F5A9C3F-1961-4AAF-A935-F0074741CE7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F5A9C3F-1961-4AAF-A935-F0074741CE7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F5A9C3F-1961-4AAF-A935-F0074741CE7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD5275E7-5C20-4169-BC9A-C0B25F968592}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD5275E7-5C20-4169-BC9A-C0B25F968592}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD5275E7-5C20-4169-BC9A-C0B25F968592}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD5275E7-5C20-4169-BC9A-C0B25F968592}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3930F24-817B-4150-8FA9-9A7093057CC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3930F24-817B-4150-8FA9-9A7093057CC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3930F24-817B-4150-8FA9-9A7093057CC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3930F24-817B-4150-8FA9-9A7093057CC6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
