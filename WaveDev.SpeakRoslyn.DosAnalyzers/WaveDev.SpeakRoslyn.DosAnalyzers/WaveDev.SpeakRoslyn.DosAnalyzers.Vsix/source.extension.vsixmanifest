@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="WaveDev.SpeakRoslyn.DosAnalyzers.Vsix..933403ff-590f-4120-af16-71bc9191e4cf" Version="1.0" Language="en-US" Publisher="robin.sedlaczek"/>
-    <DisplayName>WaveDev.SpeakRoslyn.DosAnalyzers.Vsix</DisplayName>
+    <Identity Id="WaveDev.SpeakRoslyn.DosAnalyzers2.Vsix..933403ff-590f-4120-af16-71bc9151e5ab" Version="1.1" Language="en-US" Publisher="robin.sedlaczek"/>
+    <DisplayName>WaveDev.SpeakRoslyn.DosAnalyzers2.Vsix</DisplayName>
     <Description xml:space="preserve">This is a sample diagnostic extension for the .NET Compiler Platform ("Roslyn").</Description>
   </Metadata>
   <Installation>

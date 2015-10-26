@@ -62,7 +62,7 @@ namespace WaveDev.SpeakRoslyn.DosAnalyzers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing code documentation..
+        ///   Looks up a localized string similar to [DOS] Missing code documentation..
         /// </summary>
         internal static string AnalyzerDescription {
             get {
@@ -71,7 +71,7 @@ namespace WaveDev.SpeakRoslyn.DosAnalyzers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Method leaks xml code documentation..
+        ///   Looks up a localized string similar to [DOS] Method leaks xml code documentation..
         /// </summary>
         internal static string AnalyzerMessageFormat {
             get {
@@ -80,7 +80,7 @@ namespace WaveDev.SpeakRoslyn.DosAnalyzers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing code documentation.
+        ///   Looks up a localized string similar to [DOS] Missing code documentation.
         /// </summary>
         internal static string AnalyzerTitle {
             get {

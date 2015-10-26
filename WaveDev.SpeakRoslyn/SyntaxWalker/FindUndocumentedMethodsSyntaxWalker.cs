@@ -7,18 +7,11 @@ namespace WaveDev.SpeakRoslyn.SyntaxWalker
 {
     public class FindUndocumentedMethodsSyntaxWalker : CSharpSyntaxWalker
     {
-        public FindUndocumentedMethodsSyntaxWalker()
-        {
-            MethodsWithoutDoc = new List<MethodDeclarationSyntax>();
-
-            
-        }
-
         public IList<MethodDeclarationSyntax> MethodsWithoutDoc
         {
             get;
             private set;
-        }
+        } = new List<MethodDeclarationSyntax>();
 
         public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
         {
